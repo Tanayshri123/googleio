@@ -2,11 +2,11 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
-  --kastle-pink: #f43f5e;
-  --kastle-pink-soft: #fda4af;
-  --kastle-pink-bg: #fff1f2;
-  --kastle-pink-muted: #fce7f3;
+  --foreground: #0a0a0a;
+  --muted: #737373;
+  --border: #e5e5e5;
+  --surface: #fafafa;
+  --accent: #0a0a0a;
 }
 
 @theme inline {
@@ -14,21 +14,13 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-serif: var(--font-instrument-serif);
-  --color-kastle-pink: var(--kastle-pink);
-  --color-kastle-pink-soft: var(--kastle-pink-soft);
-  --color-kastle-pink-bg: var(--kastle-pink-bg);
-  --color-kastle-pink-muted: var(--kastle-pink-muted);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
-}
-
-.font-serif {
-  font-family: var(--font-instrument-serif), Georgia, serif;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 * {
@@ -36,5 +28,11 @@ body {
 }
 
 ::selection {
-  background: rgb(244 63 94 / 0.18);
+  background: rgb(0 0 0 / 0.08);
+}
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  font-family: inherit;
 }

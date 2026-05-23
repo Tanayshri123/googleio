@@ -54,9 +54,9 @@ A **multi-agent market expansion platform**. The user uploads a company pitch de
 
 ---
 
-## 4. Technical Architecture — Distributed Orchestrator (ADK)
+## 4. Technical Architecture — Google ADK (Agent Development Kit)
 
-Pattern: **Root orchestrator** + **specialist sub-agents** + **compiler** (Google ADK / Interactions API style).
+Framework: **Google ADK** — root orchestrator dispatches tasks to n parallel specialist sub-agents, then a compiler merges their outputs.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -64,41 +64,45 @@ Pattern: **Root orchestrator** + **specialist sub-agents** + **compiler** (Googl
 └───────────────────────────┬─────────────────────────────────┘
                             ▼
 ┌─────────────────────────────────────────────────────────────┐
-│  Root Orchestrator ("The General")                          │
+│  Root Orchestrator ("The General")      ← ADK Agent          │
 │  • Ingest PDF, extract value prop & niche                   │
 │  • Decompose tasks, route to sub-agents                     │
 │  • Model: gemini-3.5-flash                                  │
-└───────┬─────────────────────┬───────────────────────────────┘
-        ▼                     ▼
-┌───────────────┐     ┌───────────────────┐
-│ Cartographer  │     │ Networker         │
-│ Maps agent    │     │ Search agent      │
-│ thinking: low │     │ thinking: medium  │
-│ Maps tool     │     │ Search tool       │
-└───────┬───────┘     └─────────┬─────────┘
-        │                       │
-        └───────────┬───────────┘
-                    ▼
-        ┌───────────────────────┐
-        │ Strategist (Compiler) │
-        │ Pydantic / JSON schema│
-        │ Structured Battle Plan│
-        └───────────┬───────────┘
-                    ▼
-        ┌───────────────────────┐
-        │ Next.js dashboard     │
+└───────┬─────────────────────┬───────────────┬───────────────┘
+        │                     │               │  ← ADK parallel dispatch
+        ▼                     ▼               ▼ (extensible — add more)
+┌───────────────┐  ┌───────────────────┐  ┌──────────────────┐
+│ Cartographer  │  │ Networker         │  │ [Future Agent]   │
+│ Maps agent    │  │ Search agent      │  │ e.g. Financial   │
+│ thinking: low │  │ thinking: medium  │  │ Legal / Culture  │
+│ Maps tool     │  │ Search tool       │  │ ...              │
+└───────┬───────┘  └─────────┬─────────┘  └────────┬─────────┘
+        │                    │                     │
+        └────────────────────┼─────────────────────┘
+                             ▼
+        ┌───────────────────────────────────────────────┐
+        │ Strategist (Compiler)         ← ADK Agent      │
+        │ Pydantic / JSON schema                         │
+        │ Merges all sub-agent outputs → Battle Plan      │
+        └───────────────────┬───────────────────────────┘
+                            ▼
+        ┌───────────────────────────────────────────────┐
+        │ Next.js dashboard                             │
         │ Map + data cards      │
         └───────────────────────┘
 ```
 
-### Agent definitions
+### Agent definitions (Google ADK)
 
-| Agent | Role | Model config | Tools | Output |
-|-------|------|--------------|-------|--------|
-| **Root Orchestrator** | Parse deck, summarize company, assign research | `gemini-3.5-flash` | File ingest (PDF) | Task briefs for sub-agents |
-| **Cartographer** | Spatial / competitive terrain | `gemini-3.5-flash`, `thinking_level: low` | **Google Maps grounding** | Competitors, complements, industry neighborhoods, POIs |
-| **Networker** | Temporal / people / web intel | `gemini-3.5-flash`, `thinking_level: medium` | **Google Search grounding** | Leaders, events, communities, regulatory notes |
-| **Strategist** | Merge + structure for UI | `gemini-3.5-flash` | None (synthesis) | Validated JSON via Pydantic schema |
+All agents are built as **ADK agents** with `gemini-3.5-flash`. The Orchestrator dispatches sub-agents in parallel via ADK's built-in orchestration. Adding new sub-agents is a matter of defining a new ADK agent and registering it on the dispatch list.
+
+| Agent | ADK Type | Role | Tools | Output |
+|-------|----------|------|-------|--------|
+| **Root Orchestrator** | `LlmAgent` | Parse deck, summarize company, assign research to sub-agents | File ingest (PDF) | Task briefs dispatched to sub-agents |
+| **Cartographer** | `LlmAgent` (thinking: low) | Spatial / competitive terrain | **Google Maps grounding** | Competitors, complements, industry neighborhoods, POIs |
+| **Networker** | `LlmAgent` (thinking: medium) | Temporal / people / web intel | **Google Search grounding** | Leaders, events, communities, regulatory notes |
+| **Strategist** | `LlmAgent` | Merge + structure for UI | None (synthesis) | Validated JSON via Pydantic schema |
+| *[Extensible]* | `LlmAgent` | Add more parallel agents (Legal, Financial, Culture, Talent…) | Any Google grounding tool | Merged by Strategist |
 
 ### Structured output schema (Strategist)
 
@@ -139,7 +143,7 @@ Pattern: **Root orchestrator** + **specialist sub-agents** + **compiler** (Googl
 | Layer | Stack | Features |
 |-------|-------|----------|
 | **Frontend** | Next.js | Company input: **PDF, website URL, or text**; **city + country**; scout **plane animation** during agents; YC-style UI; map + cards; **Ask Scout** follow-up chat (no auth) |
-| **Backend** | Node.js or Python | Interactions API (beta) / ADK multi-agent workflow, in-memory session (no DB) |
+| **Backend** | Python (FastAPI) | **Google ADK** multi-agent orchestration, in-memory session (no DB). Extensible — add new parallel sub-agents by defining ADK agents and registering on orchestrate list. |
 | **AI** | Gemini 3.5 Flash | Maps + Search grounding, structured outputs |
 
 ### Out of scope
@@ -158,7 +162,7 @@ The **simulation** is not a game engine—it is an **end-to-end scripted demo** 
 
 1. **Grounding works:** Map pins and Search citations match a real city (use a fixed demo city for reliability).  
 2. **Context works:** Uploaded deck changes competitor types and neighborhood focus.  
-3. **Orchestration works:** Three specialists run in sequence (or parallel where API allows), then Strategist merges.  
+3. **ADK orchestration works:** Orchestrator dispatches multiple sub-agents in parallel via ADK, then Strategist merges their outputs. Pipeline is extensible — adding a new agent is additive only.  
 4. **Speed works:** Full run completes in &lt; 60s (target ~30s) with visible progress.  
 5. **UI works:** One click from upload → Battle Plan on map + cards.
 
@@ -192,19 +196,19 @@ Execute in this order to de-risk the demo.
 
 **Exit criterion:** Dashboard looks finished with fake data.
 
-### Phase 2 — Single specialist agents (Day 1–2)
+### Phase 2 — Single specialist agents (ADK) (Day 1–2)
 
-- [ ] **Cartographer:** Prompt + Maps grounding only; input = `{ company_summary, city, industry }`; output = raw findings text/JSON
-- [ ] **Networker:** Prompt + Search grounding only; same inputs; output = events, contacts, regulation
+- [ ] **Cartographer:** Define as ADK `LlmAgent` with Maps grounding tool; input = `{ company_summary, city, industry }`; output = raw findings JSON
+- [ ] **Networker:** Define as ADK `LlmAgent` with Search grounding tool; same inputs; output = events, contacts, regulation
 - [ ] Log grounding metadata (citations) for judge questions
 
-**Exit criterion:** Each agent returns usable JSON in isolation via CLI or `/api/test/cartographer`.
+**Exit criterion:** Each ADK agent returns usable JSON in isolation via CLI or `/api/test/cartographer`.
 
-### Phase 3 — Orchestrator (Day 2)
+### Phase 3 — ADK Orchestrator (Day 2)
 
 - [ ] Company ingest: PDF **or** website fetch **or** raw text → `company_summary`
-- [ ] Orchestrator prompt: decompose into Cartographer + Networker task strings
-- [ ] Wire pipeline: Orchestrator → Cartographer ∥ Networker (parallel if supported) → Strategist
+- [ ] Orchestrator (ADK): dispatches parallel sub-agents (Cartographer ∥ Networker ∥ *future agents*)
+- [ ] Wire ADK pipeline: Orchestrator → {Cartographer, Networker, ...} (parallel dispatch) → Strategist
 - [ ] In-memory session: `sessionId → { status, partial, final }`
 
 **Exit criterion:** `POST /api/scout` with company input + city + country returns full Battle Plan JSON.
@@ -244,7 +248,7 @@ Execute in this order to de-risk the demo.
 | 1:05 | Highlight Strategy bullets | "First week in Austin" |
 | 1:15 | Mention Gemini: Maps + Search grounding, 1M context, ADK orchestration | Talking head / architecture inset |
 
-**Narration hook:** *"What used to take a consultant three weeks—we did in thirty seconds with three grounded agents."*
+**Narration hook:** *"What used to take a consultant three weeks—we did in thirty seconds with ADK agents grounded in Maps and Search."*
 
 ---
 
@@ -281,14 +285,15 @@ Backend responsibilities:
 | Grounding empty results | Prompt with explicit city + industry; fallback cached Austin JSON |
 | PDF parse failure | Accept `.txt` backup; pre-extracted `company_summary` in demo build |
 | Geocoding missing lat/lng | Backend geocode addresses via Maps Geocoding API |
-| Interactions API beta changes | Thin adapter layer; swap implementation without UI change |
+| ADK API changes (beta) | All agents wrapped in thin adapter layer; swap implementation without UI change. ADK abstracts agent execution — adding new parallel agents is additive, not a rewrite. |
 
 ---
 
 ## 11. Success Criteria (Definition of Done)
 
 - [ ] User uploads PDF and enters city from web UI  
-- [ ] At least **two** Gemini 3.5 Flash agents use **native** Maps and Search grounding respectively  
+- [ ] At least **two** Gemini 3.5 Flash ADK agents use **native** Maps and Search grounding respectively
+- [ ] ADK orchestrator dispatches sub-agents in parallel; pipeline is extensible for future agents
 - [ ] Output is **structured JSON** consumed by the dashboard  
 - [ ] Interactive map shows **≥3** competitor pins for demo city  
 - [ ] Events and strategy sections populated from Search agent  
@@ -311,10 +316,11 @@ Backend responsibilities:
 
 ## 13. Next Actions (Immediate)
 
-1. Initialize monorepo (`frontend` + `backend`).  
+1. Initialize monorepo (`frontend` + `backend`) with **Google ADK** as agent framework.  
 2. Implement Pydantic `BattlePlan` schema + mock API.  
-3. Build Cartographer with Maps grounding against Austin.  
-4. Record a 30s screen capture early—even with mock data—to validate pacing.  
+3. Build Cartographer as ADK agent with Maps grounding against Austin.  
+4. Wire ADK orchestrator with parallel sub-agent dispatch.  
+5. Record a 30s screen capture early—even with mock data—to validate pacing.  
 
 ---
 

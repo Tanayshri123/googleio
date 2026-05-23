@@ -77,13 +77,13 @@ export function CompanyInputTabs({ value, onChange }: Props) {
           className={cn(
             "relative flex min-h-[140px] flex-col items-center justify-center rounded-2xl border-2 border-dashed transition-colors",
             dragOver
-              ? "border-pink-400 bg-pink-50 ring-2 ring-pink-200"
-              : "border-pink-100 bg-pink-50/30 hover:border-pink-200 hover:bg-white",
+              ? "border-neutral-400 bg-neutral-50 ring-2 ring-neutral-200"
+              : "border-neutral-200 bg-neutral-50/50 hover:border-neutral-300 hover:bg-white",
           )}
         >
           {value.file ? (
             <div className="flex items-center gap-3 px-4">
-              <FileText className="h-8 w-8 text-pink-500" />
+              <FileText className="h-8 w-8 text-neutral-700" />
               <div className="text-left">
                 <p className="font-medium text-neutral-900">{value.file.name}</p>
                 <p className="text-sm text-neutral-500">
@@ -105,7 +105,7 @@ export function CompanyInputTabs({ value, onChange }: Props) {
                 Drop your pitch deck here
               </p>
               <p className="mt-1 text-xs text-neutral-400">PDF up to 10MB</p>
-              <label className="mt-4 cursor-pointer rounded-full bg-pink-500 px-4 py-2 text-xs font-medium text-white hover:bg-pink-600">
+              <label className="mt-4 cursor-pointer rounded-full bg-neutral-900 px-4 py-2 text-xs font-medium text-white hover:bg-neutral-800">
                 Browse files
                 <input
                   type="file"
@@ -120,7 +120,7 @@ export function CompanyInputTabs({ value, onChange }: Props) {
       )}
 
       {value.inputType === "website" && (
-        <div className="rounded-2xl border border-pink-100 bg-pink-50/30 p-1 focus-within:bg-white focus-within:ring-2 focus-within:ring-pink-500/20">
+        <div className="rounded-xl border border-neutral-200 bg-neutral-50 p-1 focus-within:ring-2 focus-within:ring-neutral-900/10">
           <input
             type="url"
             placeholder="https://yourcompany.com"
@@ -144,7 +144,7 @@ export function CompanyInputTabs({ value, onChange }: Props) {
             onChange({ ...value, companyText: e.target.value })
           }
           rows={5}
-          className="w-full resize-none rounded-2xl border border-pink-100 bg-pink-50/30 px-4 py-3.5 text-neutral-900 placeholder:text-neutral-400 focus:border-pink-300 focus:bg-white focus:outline-none focus:ring-2 focus:ring-pink-500/20"
+          className="w-full resize-none rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3.5 text-neutral-900 placeholder:text-neutral-400 focus:border-neutral-300 focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-900/10"
         />
       )}
     </div>

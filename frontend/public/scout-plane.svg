@@ -1,25 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 100" fill="none">
-  <ellipse cx="140" cy="92" rx="70" ry="5" fill="#000" opacity="0.06"/>
-  <!-- fuselage -->
-  <path d="M24 55c0-14 18-26 42-28h88c20 0 38 10 44 26 2 6 2 12 0 16l-6 4H70c-14 0-28-8-36-18l-10-10z" fill="#ffffff" stroke="#111" stroke-width="3.5" stroke-linejoin="round"/>
-  <!-- cockpit -->
-  <path d="M178 30c12-8 28-6 36 4 4 5 6 12 4 18l-32-4c-4-8-4-14-8-18z" fill="#bae6fd" stroke="#111" stroke-width="2.5"/>
-  <!-- windows -->
-  <rect x="118" y="42" width="10" height="10" rx="2" fill="#7dd3fc" stroke="#111" stroke-width="1.5"/>
-  <rect x="132" y="42" width="10" height="10" rx="2" fill="#7dd3fc" stroke="#111" stroke-width="1.5"/>
-  <rect x="146" y="42" width="10" height="10" rx="2" fill="#7dd3fc" stroke="#111" stroke-width="1.5"/>
-  <rect x="160" y="42" width="10" height="10" rx="2" fill="#7dd3fc" stroke="#111" stroke-width="1.5"/>
-  <!-- wing -->
-  <path d="M88 58 L248 68 L238 78 L78 68 Z" fill="#f8fafc" stroke="#111" stroke-width="3" stroke-linejoin="round"/>
-  <!-- engines -->
-  <ellipse cx="118" cy="72" rx="16" ry="11" fill="#e5e7eb" stroke="#111" stroke-width="2.5"/>
-  <circle cx="118" cy="72" r="7" fill="#1e3a5f" stroke="#111" stroke-width="2"/>
-  <ellipse cx="168" cy="74" rx="14" ry="10" fill="#e5e7eb" stroke="#111" stroke-width="2.5"/>
-  <circle cx="168" cy="74" r="6" fill="#1e3a5f" stroke="#111" stroke-width="2"/>
-  <!-- tail -->
-  <path d="M42 48 L18 32 12 44 28 52 Z" fill="#fff" stroke="#111" stroke-width="3" stroke-linejoin="round"/>
-  <path d="M52 32 L44 18 56 14 62 28 Z" fill="#fff" stroke="#111" stroke-width="2.5" stroke-linejoin="round"/>
-  <path d="M56 22 L52 12" stroke="#38bdf8" stroke-width="3" stroke-linecap="round"/>
-  <!-- nose -->
-  <path d="M248 58 L272 52 L268 62 Z" fill="#fff" stroke="#111" stroke-width="2.5" stroke-linejoin="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 90" fill="none">
+  <path d="M20 52c4-18 28-32 54-34h72c22 0 40 12 44 30 2 8 2 14-2 18l-6 4H74c-14 0-28-8-36-18l-8-6z" fill="#fff" stroke="#111" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M152 22c12-10 28-8 36 6 4 6 5 12 3 16l-30-5c-3-10-5-14-9-17z" fill="#bae6fd" stroke="#111" stroke-width="2"/>
+  <rect x="118" y="38" width="10" height="10" rx="1.5" fill="#7dd3fc" stroke="#111" stroke-width="1.2"/>
+  <rect x="132" y="38" width="10" height="10" rx="1.5" fill="#7dd3fc" stroke="#111" stroke-width="1.2"/>
+  <rect x="146" y="38" width="10" height="10" rx="1.5" fill="#7dd3fc" stroke="#111" stroke-width="1.2"/>
+  <rect x="160" y="38" width="10" height="10" rx="1.5" fill="#7dd3fc" stroke="#111" stroke-width="1.2"/>
+  <rect x="174" y="38" width="10" height="10" rx="1.5" fill="#7dd3fc" stroke="#111" stroke-width="1.2"/>
+  <path d="M88 56h88l-10 12H78l10-12z" fill="#f4f4f5" stroke="#111" stroke-width="2" stroke-linejoin="round"/>
+  <ellipse cx="108" cy="68" rx="14" ry="9" fill="#d4d4d8" stroke="#111" stroke-width="2"/>
+  <circle cx="108" cy="68" r="5" fill="#1e3a5f" stroke="#111" stroke-width="1.5"/>
+  <ellipse cx="158" cy="70" rx="12" ry="8" fill="#d4d4d8" stroke="#111" stroke-width="2"/>
+  <circle cx="158" cy="70" r="4.5" fill="#1e3a5f" stroke="#111" stroke-width="1.5"/>
+  <path d="M44 46L16 28 8 42l32 14z" fill="#fff" stroke="#111" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M54 26L44 8 58 4l12 22z" fill="#fff" stroke="#111" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M188 54l36-10-6 14-30-4z" fill="#fff" stroke="#111" stroke-width="2" stroke-linejoin="round"/>
 </svg>

@@ -1,14 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, Map, Search, Bot } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import {
   CompanyInputTabs,
   isCompanyInputValid,
   type CompanyInputValue,
 } from "./company-input-tabs";
 import { LocationFields } from "./location-fields";
-import { HeroPreview } from "./hero-preview";
+import { DashboardMock } from "./dashboard-mock";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -41,116 +41,131 @@ export function HeroLanding({
     !isLoading;
 
   return (
-    <section className="relative">
-      <div className="mx-auto max-w-6xl px-6 pb-20 pt-10 sm:pt-16">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* Left: copy + form */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55 }}
-            >
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-pink-200 bg-pink-50 px-3.5 py-1.5 text-xs font-medium text-pink-700">
-                <Sparkles className="h-3.5 w-3.5 text-pink-500" />
-                Powered by Gemini 3.5 Flash
-              </div>
-
-              <h1 className="font-serif text-4xl leading-[1.08] tracking-tight text-neutral-900 sm:text-5xl lg:text-[3.25rem]">
-                Purpose-built AI agents for{" "}
-                <span className="bg-gradient-to-r from-pink-500 via-rose-500 to-pink-600 bg-clip-text text-transparent">
-                  market expansion
-                </span>
-              </h1>
-
-              <p className="mt-5 max-w-lg text-lg leading-relaxed text-neutral-600">
-                Upload your company, pick a city and country, and get a complete
-                Battle Plan—competitors on the map, local contacts, events, and
-                your first week on the ground.
-              </p>
-
-              <div className="mt-8 flex flex-wrap gap-4">
-                {[
-                  { icon: Map, label: "Maps grounding" },
-                  { icon: Search, label: "Search grounding" },
-                  { icon: Bot, label: "Multi-agent ADK" },
-                ].map((item) => (
-                  <div
-                    key={item.label}
-                    className="flex items-center gap-2 text-sm text-neutral-500"
-                  >
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-pink-50 ring-1 ring-pink-100">
-                      <item.icon className="h-4 w-4 text-pink-500" />
-                    </div>
-                    {item.label}
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.12 }}
-              className="mt-10 rounded-[1.75rem] border border-pink-100 bg-white p-6 shadow-xl shadow-pink-100/60 sm:p-8"
-            >
-              <CompanyInputTabs
-                value={companyInput}
-                onChange={onCompanyInputChange}
-              />
-
-              <div className="mt-8 border-t border-neutral-100 pt-8">
-                <p className="mb-4 text-sm font-semibold text-neutral-800">
-                  Target market
-                </p>
-                <LocationFields
-                  city={city}
-                  country={country}
-                  onCityChange={onCityChange}
-                  onCountryChange={onCountryChange}
-                />
-              </div>
-
-              {city && country && (
-                <p className="mt-4 rounded-xl bg-pink-50 px-3 py-2 text-center text-sm text-pink-800">
-                  Expanding into{" "}
-                  <strong>
-                    {city}, {country}
-                  </strong>
-                </p>
-              )}
-
-              <button
-                type="button"
-                disabled={!canSubmit}
-                onClick={onSubmit}
-                className={cn(
-                  "mt-6 flex w-full items-center justify-center gap-2 rounded-full py-4 text-base font-semibold transition-all",
-                  canSubmit
-                    ? "bg-pink-500 text-white shadow-lg shadow-pink-500/30 hover:bg-pink-600 hover:shadow-xl"
-                    : "cursor-not-allowed bg-pink-100 text-pink-300",
-                )}
-              >
-                {isLoading ? "Launching scout…" : "Generate Battle Plan"}
-                <ArrowRight className="h-5 w-5" />
-              </button>
-
-              <button
-                type="button"
-                onClick={onDemo}
-                className="mt-3 w-full text-center text-sm font-medium text-neutral-500 transition hover:text-pink-600"
-              >
-                Or view Austin sample →
-              </button>
-            </motion.div>
+    <div>
+      {/* Hero — Tsenta-style centered headline */}
+      <section className="mx-auto max-w-4xl px-5 pt-12 text-center sm:pt-20 sm:px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1 text-xs font-medium text-neutral-600">
+            <span className="font-semibold text-neutral-900">Gemini 3.5 Flash</span>
+            <span className="text-neutral-300">·</span>
+            Maps & Search grounding
           </div>
 
-          {/* Right: product preview */}
-          <div className="hidden lg:block">
-            <HeroPreview />
+          <h1 className="text-[2.5rem] font-semibold leading-[1.1] tracking-tight text-neutral-900 sm:text-6xl sm:leading-[1.05]">
+            Know every city like
+            <br />
+            you&apos;re already there.
+          </h1>
+
+          <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-neutral-600">
+            Google AI Scout maps competitors, finds local contacts, and builds your
+            first-week Battle Plan—the moment you pick a new market.
+          </p>
+
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <button
+              type="button"
+              onClick={() => {
+                document.getElementById("scout-form")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-neutral-900 px-8 py-3.5 text-sm font-semibold text-white shadow-sm hover:bg-neutral-800 sm:w-auto"
+            >
+              Get started
+              <ArrowRight className="h-4 w-4" />
+            </button>
+            <button
+              type="button"
+              onClick={onDemo}
+              className="inline-flex w-full items-center justify-center rounded-full border border-neutral-200 bg-white px-8 py-3.5 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 sm:w-auto"
+            >
+              See demo Battle Plan
+            </button>
           </div>
+
+          <p className="mt-4 text-sm text-neutral-400">
+            Free to try — PDF, website, or text in. Results in ~60 seconds.
+          </p>
+        </motion.div>
+      </section>
+
+      {/* Product preview */}
+      <section className="mx-auto max-w-6xl px-5 pb-8 pt-12 sm:px-6">
+        <DashboardMock />
+      </section>
+
+      {/* How it works — Tsenta pipeline */}
+      <section id="how-it-works" className="border-y border-neutral-200 bg-neutral-50/50 py-16 sm:py-20">
+        <div className="mx-auto max-w-4xl px-5 text-center sm:px-6">
+          <p className="text-sm font-medium text-neutral-500">The pipeline</p>
+          <h2 className="mt-2 text-2xl font-semibold tracking-tight text-neutral-900 sm:text-3xl">
+            Four agents. One Battle Plan. Zero spreadsheets.
+          </h2>
         </div>
-      </div>
-    </section>
+        <div className="mx-auto mt-12 grid max-w-5xl gap-6 px-5 sm:grid-cols-2 lg:grid-cols-4 sm:px-6">
+          {[
+            { n: "01", title: "The General", sub: "Reads your company" },
+            { n: "02", title: "Cartographer", sub: "Maps grounding" },
+            { n: "03", title: "Networker", sub: "Search grounding" },
+            { n: "04", title: "Strategist", sub: "Your Battle Plan" },
+          ].map((step, i) => (
+            <motion.div
+              key={step.n}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08 }}
+              className="rounded-2xl border border-neutral-200 bg-white p-5"
+            >
+              <p className="text-xs font-medium text-neutral-400">{step.n}</p>
+              <p className="mt-2 font-semibold text-neutral-900">{step.title}</p>
+              <p className="mt-1 text-sm text-neutral-500">{step.sub}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Form */}
+      <section id="scout-form" className="mx-auto max-w-xl px-5 py-16 sm:px-6 sm:py-20">
+        <h2 className="text-center text-xl font-semibold text-neutral-900">
+          Generate your Battle Plan
+        </h2>
+        <p className="mt-2 text-center text-sm text-neutral-500">
+          Tell us about your company and where you want to expand.
+        </p>
+
+        <div className="mt-8 rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm sm:p-8">
+          <CompanyInputTabs value={companyInput} onChange={onCompanyInputChange} />
+
+          <div className="mt-8 border-t border-neutral-100 pt-8">
+            <p className="mb-3 text-sm font-medium text-neutral-800">Target market</p>
+            <LocationFields
+              city={city}
+              country={country}
+              onCityChange={onCityChange}
+              onCountryChange={onCountryChange}
+            />
+          </div>
+
+          <button
+            type="button"
+            disabled={!canSubmit}
+            onClick={onSubmit}
+            className={cn(
+              "mt-6 flex w-full items-center justify-center gap-2 rounded-full py-3.5 text-sm font-semibold transition-all",
+              canSubmit
+                ? "bg-neutral-900 text-white hover:bg-neutral-800"
+                : "cursor-not-allowed bg-neutral-100 text-neutral-400",
+            )}
+          >
+            {isLoading ? "Launching scout…" : "Generate Battle Plan"}
+            <ArrowRight className="h-4 w-4" />
+          </button>
+        </div>
+      </section>
+    </div>
   );
 }

@@ -47,7 +47,7 @@ layout: two-cols
 
 # Google AI Scout
 
-Multi-agent market expansion platform.
+Multi-agent market expansion platform built on **Google ADK**.
 
 Upload a **pitch deck** + enter a **target city** → get a complete **Battle Plan** in ~30 seconds.
 
@@ -60,7 +60,7 @@ Upload a **pitch deck** + enter a **target city** → get a complete **Battle Pl
 <br>
 
 <div class="text-sm opacity-70">
-  Gemini 3.5 Flash agents grounded in Google Maps & Search,<br>orchestrated like a distributed research team.
+  Google ADK agents grounded in Google Maps & Search,<br>dispatched in parallel — extensible to more agents.
 </div>
 
 ::right::
@@ -72,13 +72,15 @@ flowchart TD
   U[Upload Pitch Deck + City] --> O[Root Orchestrator]
   O --> C[Cartographer]
   O --> N[Networker]
+  O --> F["...More Agents"]
   C --> S[Strategist]
   N --> S
+  F --> S
   S --> D[Dashboard]
 ```
 
 <div class="mt-4 text-xs opacity-50 text-center">
-  General → Cartographer ∥ Networker → Strategist
+  Google ADK — Orchestrator → Cartographer ∥ Networker ∥ ... → Strategist
 </div>
 
 </div>
@@ -95,18 +97,19 @@ layout: two-cols
 
 ### Agent Pipeline
 
-| Agent | Tool | Role |
-|-------|------|------|
-| **The General** | PDF Ingest | Parse deck, define scout mission |
-| **Cartographer** | Google Maps | Pin competitors, clusters, POIs |
-| **Networker** | Google Search | Events, contacts, regulation |
-| **Strategist** | Synthesis | Merge into structured Battle Plan |
+| Agent | ADK Type | Tool | Role |
+|-------|----------|------|------|
+| **The General** | `LlmAgent` | PDF Ingest | Parse deck, decompose & dispatch tasks |
+| **Cartographer** | `LlmAgent` | Google Maps | Pin competitors, clusters, POIs |
+| **Networker** | `LlmAgent` | Google Search | Events, contacts, regulation |
+| **Strategist** | `LlmAgent` | Synthesis | Merge into structured Battle Plan |
+| *...more agents* | `LlmAgent` | Any grounding | Add Legal, Financial, Culture etc. |
 
 <br>
 
 <div class="text-sm opacity-70">
-  All agents powered by Gemini 3.5 Flash<br>
-  Parallel execution where supported
+  All agents built on Google ADK · Gemini 3.5 Flash<br>
+  ADK dispatches sub-agents in parallel — add new agents without rewrites
 </div>
 
 </div>
@@ -119,8 +122,10 @@ layout: two-cols
 flowchart LR
   G[The General] -->|task briefs| C[Cartographer]
   G -->|task briefs| N[Networker]
+  G -.->|extensible| F["..."]
   C -->|maps data| S[Strategist]
   N -->|search data| S
+  F -.->|more data| S
   S -->|JSON| UI[Dashboard]
 
   style C fill:#dbeafe,stroke:#2563eb
@@ -129,7 +134,7 @@ flowchart LR
 ```
 
 <div class="mt-4 text-xs opacity-50 text-center">
-  Maps grounding · Search grounding · Structured output
+  Google ADK · Maps grounding · Search grounding · Structured output
 </div>
 
 </div>

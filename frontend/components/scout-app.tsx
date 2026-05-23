@@ -30,7 +30,7 @@ export function ScoutApp() {
   const scout = useScout();
   const chatSessionId =
     scout.sessionId ?? (scout.battlePlan ? "demo" : null);
-  const chat = useScoutChat(chatSessionId);
+  const chat = useScoutChat(chatSessionId, scout.battlePlan);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -151,7 +151,7 @@ export function ScoutApp() {
         )}
       </main>
 
-      <footer className="relative border-t border-pink-100 py-10 text-center text-xs text-neutral-400">
+      <footer className="relative border-t border-neutral-200 py-12 text-center text-sm text-neutral-500">
         Google AI Scout · Gemini 3.5 Flash · Maps & Search grounding
       </footer>
     </div>

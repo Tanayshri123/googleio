@@ -1,0 +1,118 @@
+{
+  "company_summary": "B2B workflow automation for independent restaurants — scheduling, inventory sync, and staff coordination in one platform.",
+  "target_city": "Austin",
+  "target_country": "United States",
+  "competitors": [
+    {
+      "name": "TableFlow ATX",
+      "address": "211 E 6th St, Austin, TX 78701",
+      "lat": 30.2674,
+      "lng": -97.7401,
+      "notes": "Direct competitor — restaurant ops SaaS, strong downtown presence."
+    },
+    {
+      "name": "KitchenPulse",
+      "address": "1401 E 7th St, Austin, TX 78702",
+      "lat": 30.2638,
+      "lng": -97.7275,
+      "notes": "East Austin focus; targets fast-casual chains."
+    },
+    {
+      "name": "ServeStack Pro",
+      "address": "11501 Domain Dr, Austin, TX 78758",
+      "lat": 30.4028,
+      "lng": -97.7253,
+      "notes": "Enterprise-leaning; active at The Domain tech corridor."
+    },
+    {
+      "name": "LineUp Hospitality",
+      "address": "401 Congress Ave, Austin, TX 78701",
+      "lat": 30.2665,
+      "lng": -97.7432,
+      "notes": "Staff scheduling overlap — potential competitive pressure."
+    }
+  ],
+  "complementary_businesses": [
+    { "name": "ATX Food Collective", "notes": "Shared kitchen network — partnership for pilot deployments." },
+    { "name": "LocalLedger POS", "notes": "POS integrator; API-friendly, not direct competitor." }
+  ],
+  "neighborhoods": [
+    {
+      "name": "East Austin",
+      "why_relevant": "Dense independent restaurant scene; lower rent than downtown for pop-up pilots."
+    },
+    {
+      "name": "The Domain",
+      "why_relevant": "Corporate HQs and upscale dining — enterprise upsell path."
+    },
+    {
+      "name": "South Congress",
+      "why_relevant": "High-visibility foodie corridor; strong brand partnership opportunities."
+    }
+  ],
+  "events": [
+    {
+      "title": "Austin Restaurant Technology Meetup",
+      "date": "2026-06-12",
+      "url": "https://example.com/artm",
+      "relevance": "Founders and ops leaders evaluating new stack tools."
+    },
+    {
+      "title": "Texas Restaurant Association — Central Texas Chapter",
+      "date": "2026-07-08",
+      "url": "https://example.com/tra",
+      "relevance": "SMB restaurant owners; ideal for first 10 customers."
+    },
+    {
+      "title": "Capital Factory Accelerator Demo Day",
+      "date": "2026-06-20",
+      "url": "https://example.com/cf",
+      "relevance": "Investors + BD partners in food/hospitality tech."
+    }
+  ],
+  "key_contacts": [
+    {
+      "name": "Maria Chen",
+      "role": "Director, Austin Chamber — Economic Development",
+      "source": "Google Search grounding"
+    },
+    {
+      "name": "James Okonkwo",
+      "role": "Organizer, ATX Restaurant Ops Slack (4.2k members)",
+      "source": "Google Search grounding"
+    },
+    {
+      "name": "Priya Sharma",
+      "role": "GM, Fareground Austin food hall",
+      "source": "Google Maps grounding"
+    }
+  ],
+  "communities": [
+    {
+      "name": "ATX Restaurant Ops",
+      "platform": "Slack",
+      "url": "https://example.com/slack"
+    },
+    {
+      "name": "Austin Food Entrepreneurs",
+      "platform": "Discord",
+      "url": "https://example.com/discord"
+    }
+  ],
+  "regulatory_notes": [
+    "Texas does not require local food-handler certification for SaaS vendors; focus on customer PCI compliance for payments integrations.",
+    "Austin commercial occupancy permits apply if opening a physical pilot kitchen — not applicable for pure software."
+  ],
+  "strategy_bullets": [
+    "Lead with East Austin independents — fastest feedback loop, least entrenched vendor contracts.",
+    "Differentiate on staff scheduling + inventory in one UI; TableFlow is scheduling-only.",
+    "Partner with LocalLedger POS for distribution before building direct sales team."
+  ],
+  "recommended_first_week": [
+    "Join ATX Restaurant Ops Slack and introduce a 14-day pilot offer.",
+    "Book 5 discovery calls with East Austin owners via Fareground intro (Priya Sharma).",
+    "Walk Congress Ave corridor — map 10 targets, note current POS stickers on windows.",
+    "Attend Restaurant Technology Meetup; bring one-page Battle Plan printout.",
+    "Run competitive mystery-shop on TableFlow and KitchenPulse onboarding flows."
+  ]
+}

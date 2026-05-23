@@ -1,0 +1,74 @@
+"use client";
+
+/** Inline cartoon jet — side profile, thick outlines (matches user reference) */
+export function CartoonPlane({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 280 100"
+      fill="none"
+      className={className}
+      aria-hidden
+    >
+      <ellipse cx="140" cy="92" rx="70" ry="5" fill="#000" opacity="0.06" />
+      <path
+        d="M24 55c0-14 18-26 42-28h88c20 0 38 10 44 26 2 6 2 12 0 16l-6 4H70c-14 0-28-8-36-18l-10-10z"
+        fill="#ffffff"
+        stroke="#111"
+        strokeWidth="3.5"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M178 30c12-8 28-6 36 4 4 5 6 12 4 18l-32-4c-4-8-4-14-8-18z"
+        fill="#bae6fd"
+        stroke="#111"
+        strokeWidth="2.5"
+      />
+      {[118, 132, 146, 160].map((x) => (
+        <rect
+          key={x}
+          x={x}
+          y={42}
+          width={10}
+          height={10}
+          rx={2}
+          fill="#7dd3fc"
+          stroke="#111"
+          strokeWidth="1.5"
+        />
+      ))}
+      <path
+        d="M88 58 L248 68 L238 78 L78 68 Z"
+        fill="#f8fafc"
+        stroke="#111"
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+      <ellipse cx="118" cy="72" rx="16" ry="11" fill="#e5e7eb" stroke="#111" strokeWidth="2.5" />
+      <circle cx="118" cy="72" r="7" fill="#1e3a5f" stroke="#111" strokeWidth="2" />
+      <ellipse cx="168" cy="74" rx="14" ry="10" fill="#e5e7eb" stroke="#111" strokeWidth="2.5" />
+      <circle cx="168" cy="74" r="6" fill="#1e3a5f" stroke="#111" strokeWidth="2" />
+      <path
+        d="M42 48 L18 32 12 44 28 52 Z"
+        fill="#fff"
+        stroke="#111"
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M52 32 L44 18 56 14 62 28 Z"
+        fill="#fff"
+        stroke="#111"
+        strokeWidth="2.5"
+        strokeLinejoin="round"
+      />
+      <path d="M56 22 L52 12" stroke="#38bdf8" strokeWidth="3" strokeLinecap="round" />
+      <path
+        d="M248 58 L272 52 L268 62 Z"
+        fill="#fff"
+        stroke="#111"
+        strokeWidth="2.5"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}

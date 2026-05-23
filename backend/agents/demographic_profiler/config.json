@@ -1,0 +1,8 @@
+{
+  "skill_id": "demographic_profiler",
+  "thinking_budget": 512,
+  "tools": ["google_search"],
+  "parallel": true,
+  "role": "strategist",
+  "output_schema": "{\"target_segments\":[],\"income_and_age_notes\":\"\",\"high_fit_neighborhoods\":[],\"gaps_and_blind_spots\":[]}"
+}

@@ -2,22 +2,38 @@
 
 import { motion } from "framer-motion";
 import { ScoutPlane } from "./scout-plane";
-import { AgentStepper } from "./agent-stepper";
-import type { AgentId } from "@/lib/types";
+import { SkillStepper } from "./skill-stepper";
+import { skillLabel } from "@/lib/skill-labels";
+import type { ScoutPhase } from "@/lib/types";
 
 type Props = {
-  activeAgent: AgentId;
   progress: string;
   city: string;
   country: string;
+  selectedSkills: string[];
+  completedSkills: string[];
+  failedSkills?: string[];
+  activeSkill: string | null;
+  scoutPhase: ScoutPhase;
 };
 
 export function ScoutingView({
-  activeAgent,
   progress,
   city,
   country,
+  selectedSkills,
+  completedSkills,
+  failedSkills,
+  activeSkill,
+  scoutPhase,
 }: Props) {
+  const skillLine =
+    activeSkill != null
+      ? skillLabel(activeSkill)
+      : selectedSkills.length > 0
+        ? `${selectedSkills.length} skills queued`
+        : null;
+
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -27,12 +43,19 @@ export function ScoutingView({
       <div className="text-center">
         <p className="text-sm font-medium text-neutral-500">Agents at work</p>
         <h2 className="mt-2 text-2xl font-semibold tracking-tight text-neutral-900 sm:text-3xl">
-          Building your Battle Plan
+          Building your Scout Report
         </h2>
       </div>
 
       <div className="mt-10">
-        <ScoutPlane activeAgent={activeAgent} city={city} country={country} />
+        <ScoutPlane
+          scoutPhase={scoutPhase}
+          selectedSkills={selectedSkills}
+          completedSkills={completedSkills}
+          activeSkill={activeSkill}
+          city={city}
+          country={country}
+        />
       </div>
 
       <div className="mt-8 rounded-2xl border border-neutral-200 bg-neutral-950 p-5 font-mono text-[13px] text-neutral-300 shadow-sm">
@@ -43,13 +66,20 @@ export function ScoutingView({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          <p>→ agent: {activeAgent}</p>
+          {skillLine && <p>→ skill: {skillLine}</p>}
+          <p>→ phase: {scoutPhase}</p>
           <p>→ target: {city}, {country}</p>
         </motion.div>
       </div>
 
       <div className="mt-8">
-        <AgentStepper activeAgent={activeAgent} progress={progress} />
+        <SkillStepper
+          scoutPhase={scoutPhase}
+          selectedSkills={selectedSkills}
+          completedSkills={completedSkills}
+          failedSkills={failedSkills}
+          activeSkill={activeSkill}
+        />
       </div>
     </motion.section>
   );

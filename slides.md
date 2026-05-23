@@ -47,7 +47,7 @@ layout: two-cols
 
 # Google AI Scout
 
-Multi-agent market expansion platform built on **Google ADK**.
+Multi-agent market expansion platform built on **Gemini Managed Agents** (<1 week old at I/O).
 
 Upload a **pitch deck** + enter a **target city** → get a complete **Battle Plan** in ~30 seconds.
 
@@ -60,7 +60,7 @@ Upload a **pitch deck** + enter a **target city** → get a complete **Battle Pl
 <br>
 
 <div class="text-sm opacity-70">
-  Google ADK agents grounded in Google Maps & Search,<br>dispatched in parallel — extensible to more agents.
+  Gemini Managed Agents grounded in Google Maps & Search,<br>defined as AGENTS.md files, running in isolated sandboxes.
 </div>
 
 ::right::
@@ -69,18 +69,19 @@ Upload a **pitch deck** + enter a **target city** → get a complete **Battle Pl
 
 ```mermaid
 flowchart TD
-  U[Upload Pitch Deck + City] --> O[Root Orchestrator]
-  O --> C[Cartographer]
-  O --> N[Networker]
-  O --> F["...More Agents"]
-  C --> S[Strategist]
+  U[Upload Pitch Deck + City] --> API[Interactions API]
+  API --> O["AGENTS.md (Orchestrator)"]
+  O --> C["AGENTS.md (Cartographer)"]
+  O --> N["AGENTS.md (Networker)"]
+  O --> F["AGENTS.md (...more)"]
+  C --> S["AGENTS.md (Strategist)"]
   N --> S
   F --> S
   S --> D[Dashboard]
 ```
 
 <div class="mt-4 text-xs opacity-50 text-center">
-  Google ADK — Orchestrator → Cartographer ∥ Networker ∥ ... → Strategist
+  Gemini Managed Agents — declarative AGENTS.md files → isolated sandboxes
 </div>
 
 </div>
@@ -97,19 +98,19 @@ layout: two-cols
 
 ### Agent Pipeline
 
-| Agent | ADK Type | Tool | Role |
-|-------|----------|------|------|
-| **The General** | `LlmAgent` | PDF Ingest | Parse deck, decompose & dispatch tasks |
-| **Cartographer** | `LlmAgent` | Google Maps | Pin competitors, clusters, POIs |
-| **Networker** | `LlmAgent` | Google Search | Events, contacts, regulation |
-| **Strategist** | `LlmAgent` | Synthesis | Merge into structured Battle Plan |
-| *...more agents* | `LlmAgent` | Any grounding | Add Legal, Financial, Culture etc. |
+| Agent | Definition | Tool | Role |
+|-------|------------|------|------|
+| **The General** | `AGENTS.md` | PDF Ingest | Parse deck, decompose & orchestrate |
+| **Cartographer** | `AGENTS.md` | Maps Grounding + Browse | Pin competitors, clusters, POIs |
+| **Networker** | `AGENTS.md` | Search Grounding + Browse | Events, contacts, regulation |
+| **Strategist** | `AGENTS.md` | Code Execution | Merge into structured Battle Plan |
+| *...more agents* | `AGENTS.md` | Any grounding | Add Legal, Financial, Culture etc. |
 
 <br>
 
 <div class="text-sm opacity-70">
-  All agents built on Google ADK · Gemini 3.5 Flash<br>
-  ADK dispatches sub-agents in parallel — add new agents without rewrites
+  All agents are declarative AGENTS.md files · Gemini 3.5 Flash<br>
+  Interactions API provisions isolated sandboxes — no infrastructure to run
 </div>
 
 </div>
@@ -120,10 +121,10 @@ layout: two-cols
 
 ```mermaid {scale: 0.9}
 flowchart LR
-  G[The General] -->|task briefs| C[Cartographer]
-  G -->|task briefs| N[Networker]
-  G -.->|extensible| F["..."]
-  C -->|maps data| S[Strategist]
+  G["AGENTS.md\nThe General"] -->|calls| C["AGENTS.md\nCartographer"]
+  G -->|calls| N["AGENTS.md\nNetworker"]
+  G -.->|extensible| F["AGENTS.md\n..."]
+  C -->|maps data| S["AGENTS.md\nStrategist"]
   N -->|search data| S
   F -.->|more data| S
   S -->|JSON| UI[Dashboard]
@@ -134,7 +135,7 @@ flowchart LR
 ```
 
 <div class="mt-4 text-xs opacity-50 text-center">
-  Google ADK · Maps grounding · Search grounding · Structured output
+  Gemini Managed Agents · Maps grounding · Search grounding · Code execution
 </div>
 
 </div>
@@ -183,7 +184,7 @@ layout: default
 layout: default
 ---
 
-# Why Gemini 3.5 Flash
+# Why Gemini 3.5 Flash + Managed Agents
 
 <div class="grid grid-cols-2 gap-6 mt-10">
 
@@ -219,10 +220,18 @@ layout: default
   </div>
 </div>
 
+<div class="flex gap-4 items-start p-4 rounded-xl bg-green-50/50 border border-green-200">
+  <div class="text-2xl mt-1">🆕</div>
+  <div>
+    <div class="font-semibold">Gemini Managed Agents <span class="text-xs bg-green-200 px-2 py-0.5 rounded-full">I/O 2026</span></div>
+    <div class="text-sm opacity-70">Define agents as AGENTS.md files — Interactions API provisions isolated Linux sandboxes. Code execution, web browsing, state persistence built-in.</div>
+  </div>
+</div>
+
 </div>
 
 <div class="mt-6 text-center text-sm opacity-60">
-  Native tool use + multi-step agentic workflow + real-world grounding — not a single monolithic prompt
+  Declarative AGENTS.md + native Maps/Search grounding + isolated sandboxes — brand new at Google I/O 2026
 </div>
 
 ---

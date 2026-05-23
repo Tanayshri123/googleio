@@ -33,7 +33,7 @@ export function BattlePlanDashboard({
       <div className="mb-8 flex flex-col gap-4 border-b border-neutral-200 pb-8 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <p className="text-xs font-medium uppercase tracking-wider text-neutral-500">
-            Battle Plan
+            Scout Report
           </p>
           <h1 className="mt-1 text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl">
             {plan.target_city}, {plan.target_country}
@@ -51,6 +51,20 @@ export function BattlePlanDashboard({
           New scout
         </button>
       </div>
+
+      {(plan.pipeline_warnings?.length ?? 0) > 0 && (
+        <div
+          className="mb-6 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-950"
+          role="status"
+        >
+          <p className="font-medium">Partial report</p>
+          <ul className="mt-1 list-disc space-y-0.5 pl-5 text-amber-900/90">
+            {plan.pipeline_warnings!.map((w) => (
+              <li key={w}>{w}</li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {/* 1. Strategy first */}
       <section className="mb-8">

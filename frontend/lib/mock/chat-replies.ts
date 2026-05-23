@@ -38,5 +38,5 @@ export function mockChatReply(message: string): string {
       return entry.reply;
     }
   }
-  return "Based on your Austin Battle Plan: focus on East Austin independents first, differentiate from TableFlow with combined scheduling + inventory, and use the Chamber contact Maria Chen for warm intros. Ask me about partners, competitors, neighborhoods, or your first week.";
+  return "Based on your Austin Scout Report: focus on East Austin independents first, differentiate from TableFlow with combined scheduling + inventory, and reach out to the Greater Austin Chamber for warm intros. Ask me about partners, competitors, neighborhoods, or your first week.";
 }

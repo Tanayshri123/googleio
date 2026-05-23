@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Google AI Scout — Market expansion intelligence",
   description:
-    "Know every city like you're already there. Multi-agent Battle Plans powered by Gemini 3.5 Flash.",
+    "Know every city like you're already there. Multi-agent Scout Reports powered by Gemini 3.5 Flash.",
 };
 
 export default function RootLayout({

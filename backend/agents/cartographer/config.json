@@ -1,0 +1,7 @@
+{
+  "skill_id": "competitor_analysis",
+  "thinking_budget": 256,
+  "tools": ["google_maps"],
+  "parallel": true,
+  "role": "cartographer"
+}

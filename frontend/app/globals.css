@@ -1,12 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #f8f9ff;
   --foreground: #0a0a0a;
   --muted: #737373;
   --border: #e5e5e5;
   --surface: #fafafa;
   --accent: #0a0a0a;
+  --google-blue: #4285f4;
+  --google-red: #ea4335;
+  --google-yellow: #fbbc05;
+  --google-green: #34a853;
 }
 
 @theme inline {
@@ -28,7 +32,49 @@ body {
 }
 
 ::selection {
-  background: rgb(0 0 0 / 0.08);
+  background: rgb(66 133 244 / 0.2);
+}
+
+@keyframes scout-blob-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(3%, 2%) scale(1.04);
+  }
+  66% {
+    transform: translate(-2%, 3%) scale(0.98);
+  }
+}
+
+.scout-blob {
+  animation: scout-blob-drift 18s ease-in-out infinite;
+}
+
+.scout-blob-delay-1 {
+  animation-delay: -4s;
+}
+
+.scout-blob-delay-2 {
+  animation-delay: -9s;
+}
+
+.scout-blob-delay-3 {
+  animation-delay: -13s;
+}
+
+.scout-gradient-text {
+  background: linear-gradient(
+    90deg,
+    var(--google-blue),
+    var(--google-red),
+    var(--google-yellow),
+    var(--google-green)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .leaflet-container {

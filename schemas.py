@@ -98,7 +98,10 @@ class CostEstimationOutput(BaseModel):
 class NetworkBrokerOutput(BaseModel):
     """Output of the network_broker skill — Google Search grounded."""
     organizations: List[Organization] = Field(description="Local chambers, accelerators, trade associations to engage")
-    key_contacts: List[KeyContact] = Field(description="Named individuals worth reaching out to first")
+    key_contacts: List[KeyContact] = Field(
+        default_factory=list,
+        description="Deprecated — leave empty; use organizations only, never named individuals",
+    )
     events: List[LiveEvent] = Field(description="Upcoming networking events, trade shows, mixers")
     communities: List[CommunityNode] = Field(description="Slack/Discord/Subreddit/LinkedIn communities to join")
 

@@ -1,4 +1,5 @@
-import type { AgentId, ScoutInput, ScoutStatus } from "@/lib/types";
+import type { AgentId, BattlePlan, ScoutInput, ScoutStatus } from "@/lib/types";
+import { sanitizeScoutReport } from "@/lib/sanitize-plan";
 import battlePlanAustin from "./battle-plan-austin.json";
 
 const AGENT_SEQUENCE: {
@@ -9,22 +10,27 @@ const AGENT_SEQUENCE: {
   {
     agent: "general",
     progress: "The General is reading your company profile…",
-    delayMs: 3500,
+    delayMs: 2000,
   },
   {
     agent: "cartographer",
     progress: "Cartographer is mapping competitors with Google Maps…",
-    delayMs: 3500,
+    delayMs: 2000,
   },
   {
     agent: "networker",
-    progress: "Networker is scanning events and contacts with Google Search…",
-    delayMs: 3500,
+    progress: "Networker is scanning events and organizations with Google Search…",
+    delayMs: 2000,
   },
   {
     agent: "strategist",
-    progress: "Strategist is compiling your Battle Plan…",
-    delayMs: 3000,
+    progress: "Compliance Officer is checking permits and regulations…",
+    delayMs: 2000,
+  },
+  {
+    agent: "strategist",
+    progress: "Compiling your Scout Report…",
+    delayMs: 2000,
   },
 ];
 
@@ -77,8 +83,8 @@ export function mockGetScoutStatus(sessionId: string): ScoutStatus {
     return {
       status: "done",
       active_agent: "strategist",
-      progress: "Battle Plan ready.",
-      result: plan,
+      progress: "Scout Report ready.",
+      result: sanitizeScoutReport(plan as BattlePlan),
     };
   }
 
@@ -105,5 +111,5 @@ export async function mockPollScout(
 }
 
 export function loadDemoBattlePlan() {
-  return battlePlanAustin as typeof battlePlanAustin;
+  return sanitizeScoutReport(battlePlanAustin as BattlePlan);
 }

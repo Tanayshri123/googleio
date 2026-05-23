@@ -19,7 +19,7 @@ export function AppShell({
 }: Props) {
   const nav = [
     { id: "dashboard" as const, icon: LayoutDashboard, label: "Dashboard" },
-    { id: "battle-plan" as const, icon: Map, label: "Battle Plan" },
+    { id: "battle-plan" as const, icon: Map, label: "Scout Report" },
     { id: "ask" as const, icon: MessageCircle, label: "Ask Scout" },
   ];
 

@@ -70,21 +70,25 @@
       "relevance": "Investors + BD partners in food/hospitality tech."
     }
   ],
-  "key_contacts": [
+  "key_contacts": [],
+  "organizations": [
     {
-      "name": "Maria Chen",
-      "role": "Director, Austin Chamber — Economic Development",
-      "source": "Google Search grounding"
+      "name": "Greater Austin Chamber of Commerce",
+      "type": "chamber_of_commerce",
+      "url": "https://example.com/austin-chamber",
+      "why_relevant": "Economic development programs for new market entrants."
     },
     {
-      "name": "James Okonkwo",
-      "role": "Organizer, ATX Restaurant Ops Slack (4.2k members)",
-      "source": "Google Search grounding"
+      "name": "Capital Factory",
+      "type": "accelerator",
+      "url": "https://example.com/cf",
+      "why_relevant": "Startup ecosystem hub with hospitality tech founders."
     },
     {
-      "name": "Priya Sharma",
-      "role": "GM, Fareground Austin food hall",
-      "source": "Google Maps grounding"
+      "name": "Texas Restaurant Association — Central Texas Chapter",
+      "type": "trade_association",
+      "url": "https://example.com/tra",
+      "why_relevant": "Direct access to SMB restaurant owners."
     }
   ],
   "communities": [
@@ -110,9 +114,9 @@
   ],
   "recommended_first_week": [
     "Join ATX Restaurant Ops Slack and introduce a 14-day pilot offer.",
-    "Book 5 discovery calls with East Austin owners via Fareground intro (Priya Sharma).",
+    "Book 5 discovery calls with East Austin owners via local chamber introductions.",
     "Walk Congress Ave corridor — map 10 targets, note current POS stickers on windows.",
-    "Attend Restaurant Technology Meetup; bring one-page Battle Plan printout.",
+    "Attend Restaurant Technology Meetup; bring one-page Scout Report printout.",
     "Run competitive mystery-shop on TableFlow and KitchenPulse onboarding flows."
   ]
 }

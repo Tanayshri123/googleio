@@ -29,6 +29,7 @@ export async function startScout(
   form.append("input_type", input.input_type);
   form.append("city", input.city);
   form.append("country", input.country);
+  form.append("deep_scope", String(input.deep_scope ?? false));
   if (input.file) form.append("file", input.file);
   if (input.website_url) form.append("website_url", input.website_url);
   if (input.company_text) form.append("company_text", input.company_text);
@@ -64,8 +65,10 @@ export async function getScoutStatus(sessionId: string): Promise<ScoutStatus> {
 export async function sendChatMessage(
   sessionId: string,
   message: string,
+  history: { role: "user" | "assistant"; content: string }[] = [],
+  plan?: BattlePlan,
 ): Promise<{ reply: string }> {
-  if (USE_MOCK || sessionId === "demo") {
+  if (USE_MOCK) {
     await new Promise((r) => setTimeout(r, 600 + Math.random() * 400));
     return { reply: mockChatReply(message) };
   }
@@ -73,7 +76,11 @@ export async function sendChatMessage(
   const res = await fetch(`${API_URL}/api/scout/${sessionId}/chat`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ message }),
+    body: JSON.stringify({
+      message,
+      history,
+      ...(sessionId === "demo" && plan ? { plan } : {}),
+    }),
   });
   if (!res.ok) {
     throw new Error(await parseError(res));

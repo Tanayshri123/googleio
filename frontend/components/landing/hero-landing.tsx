@@ -21,6 +21,8 @@ type Props = {
   onSubmit: () => void;
   onDemo: () => void;
   isLoading?: boolean;
+  deepScope: boolean;
+  onDeepScopeChange: (v: boolean) => void;
 };
 
 export function HeroLanding({
@@ -33,6 +35,8 @@ export function HeroLanding({
   onSubmit,
   onDemo,
   isLoading,
+  deepScope,
+  onDeepScopeChange,
 }: Props) {
   const canSubmit =
     isCompanyInputValid(companyInput) &&
@@ -49,21 +53,23 @@ export function HeroLanding({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1 text-xs font-medium text-neutral-600">
-            <span className="font-semibold text-neutral-900">Gemini 3.5 Flash</span>
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/70 px-3 py-1.5 text-xs font-medium text-neutral-600 shadow-sm backdrop-blur-sm">
+            <span className="scout-gradient-text font-semibold">Gemini 3.5 Flash</span>
             <span className="text-neutral-300">·</span>
             Maps & Search grounding
           </div>
 
           <h1 className="text-[2.5rem] font-semibold leading-[1.1] tracking-tight text-neutral-900 sm:text-6xl sm:leading-[1.05]">
-            Know every city like
+            Know every{" "}
+            <span className="scout-gradient-text">city</span>
             <br />
-            you&apos;re already there.
+            like you&apos;re already there.
           </h1>
 
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-neutral-600">
-            Google AI Scout maps competitors, finds local contacts, and builds your
-            first-week Battle Plan—the moment you pick a new market.
+            Google AI Scout maps competitors, surfaces local organizations, and builds your
+            path into a new market—strategy, partners, and where to start, the moment you
+            pick a city.
           </p>
 
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -72,7 +78,7 @@ export function HeroLanding({
               onClick={() => {
                 document.getElementById("scout-form")?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-neutral-900 px-8 py-3.5 text-sm font-semibold text-white shadow-sm hover:bg-neutral-800 sm:w-auto"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#1a73e8] px-8 py-3.5 text-sm font-semibold text-white shadow-md shadow-[#4285F4]/25 hover:bg-[#1967d2] sm:w-auto"
             >
               Get started
               <ArrowRight className="h-4 w-4" />
@@ -80,9 +86,9 @@ export function HeroLanding({
             <button
               type="button"
               onClick={onDemo}
-              className="inline-flex w-full items-center justify-center rounded-full border border-neutral-200 bg-white px-8 py-3.5 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 sm:w-auto"
+              className="inline-flex w-full items-center justify-center rounded-full border border-white/90 bg-white/80 px-8 py-3.5 text-sm font-semibold text-neutral-800 shadow-sm backdrop-blur-sm hover:bg-white sm:w-auto"
             >
-              See demo Battle Plan
+              See demo Scout Report
             </button>
           </div>
 
@@ -97,20 +103,32 @@ export function HeroLanding({
         <DashboardMock />
       </section>
 
-      {/* How it works — Tsenta pipeline */}
-      <section id="how-it-works" className="border-y border-neutral-200 bg-neutral-50/50 py-16 sm:py-20">
+      {/* How it works — illustrative sample (live scouts pick agents per product) */}
+      <section id="how-it-works" className="border-y border-white/60 bg-white/50 py-16 backdrop-blur-sm sm:py-20">
         <div className="mx-auto max-w-4xl px-5 text-center sm:px-6">
-          <p className="text-sm font-medium text-neutral-500">The pipeline</p>
-          <h2 className="mt-2 text-2xl font-semibold tracking-tight text-neutral-900 sm:text-3xl">
-            Four agents. One Battle Plan. Zero spreadsheets.
+          <span className="inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-amber-900">
+            Sample workflow
+          </span>
+          <h2 className="mt-4 text-2xl font-semibold tracking-tight text-neutral-900 sm:text-3xl">
+            Multiple agents. One expansion path. Zero spreadsheets.
           </h2>
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-neutral-600 sm:text-base">
+            This is an <strong className="font-medium text-neutral-800">example</strong> of how
+            Scout can run—not a fixed pipeline. When you scout, The General chooses the right
+            research agents for your product (competitor analysis, market vibe, partner scout,
+            regulatory hurdles, and more).
+          </p>
         </div>
-        <div className="mx-auto mt-12 grid max-w-5xl gap-6 px-5 sm:grid-cols-2 lg:grid-cols-4 sm:px-6">
+        <p className="mx-auto mt-8 max-w-5xl px-5 text-center text-xs font-medium uppercase tracking-wider text-neutral-400 sm:px-6">
+          Illustrative agent sequence
+        </p>
+        <div className="mx-auto mt-4 grid max-w-5xl gap-6 px-5 sm:grid-cols-2 lg:grid-cols-5 sm:px-6">
           {[
             { n: "01", title: "The General", sub: "Reads your company" },
             { n: "02", title: "Cartographer", sub: "Maps grounding" },
             { n: "03", title: "Networker", sub: "Search grounding" },
-            { n: "04", title: "Strategist", sub: "Your Battle Plan" },
+            { n: "04", title: "Compliance", sub: "Legal intel" },
+            { n: "05", title: "Deep Verify", sub: "Strategic QA" },
           ].map((step, i) => (
             <motion.div
               key={step.n}
@@ -131,7 +149,7 @@ export function HeroLanding({
       {/* Form */}
       <section id="scout-form" className="mx-auto max-w-xl px-5 py-16 sm:px-6 sm:py-20">
         <h2 className="text-center text-xl font-semibold text-neutral-900">
-          Generate your Battle Plan
+          Generate your Scout Report
         </h2>
         <p className="mt-2 text-center text-sm text-neutral-500">
           Tell us about your company and where you want to expand.
@@ -150,6 +168,30 @@ export function HeroLanding({
             />
           </div>
 
+          <div className="mt-6 flex items-center justify-between rounded-xl border border-neutral-200 bg-neutral-50/70 px-4 py-3">
+            <div>
+              <p className="text-sm font-medium text-neutral-800">Deep Scope Strategy</p>
+              <p className="text-xs text-neutral-500">Cross-examine all agent findings for anomalies and risks</p>
+            </div>
+            <button
+              type="button"
+              role="switch"
+              aria-checked={deepScope}
+              onClick={() => onDeepScopeChange(!deepScope)}
+              className={cn(
+                "relative inline-flex h-6 w-11 items-center rounded-full transition-colors",
+                deepScope ? "bg-[#1a73e8]" : "bg-neutral-300",
+              )}
+            >
+              <span
+                className={cn(
+                  "inline-block h-4 w-4 transform rounded-full bg-white shadow-sm transition-transform",
+                  deepScope ? "translate-x-6" : "translate-x-1",
+                )}
+              />
+            </button>
+          </div>
+
           <button
             type="button"
             disabled={!canSubmit}
@@ -157,11 +199,11 @@ export function HeroLanding({
             className={cn(
               "mt-6 flex w-full items-center justify-center gap-2 rounded-full py-3.5 text-sm font-semibold transition-all",
               canSubmit
-                ? "bg-neutral-900 text-white hover:bg-neutral-800"
+                ? "bg-[#1a73e8] text-white shadow-md shadow-[#4285F4]/20 hover:bg-[#1967d2]"
                 : "cursor-not-allowed bg-neutral-100 text-neutral-400",
             )}
           >
-            {isLoading ? "Launching scout…" : "Generate Battle Plan"}
+            {isLoading ? "Launching scout…" : "Generate Scout Report"}
             <ArrowRight className="h-4 w-4" />
           </button>
         </div>

@@ -1,0 +1,8 @@
+{
+  "skill_id": "market_vibe_check",
+  "thinking_budget": 512,
+  "tools": ["google_search"],
+  "parallel": true,
+  "role": "strategist",
+  "output_schema": "{\"sentiment_label\":\"\",\"narrative_summary\":\"\",\"behavioral_trends\":[],\"demand_signals\":[],\"risks\":[]}"
+}

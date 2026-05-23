@@ -1,17 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { AgentId } from "@/lib/types";
-
-const PROGRESS: Record<AgentId, number> = {
-  general: 0.06,
-  cartographer: 0.35,
-  networker: 0.65,
-  strategist: 0.94,
-};
+import { scoutProgressFraction } from "@/lib/scout-progress";
+import type { ScoutPhase } from "@/lib/types";
 
 type Props = {
-  activeAgent: AgentId;
+  scoutPhase: ScoutPhase;
+  selectedSkills: string[];
+  completedSkills: string[];
+  activeSkill: string | null;
   city: string;
   country: string;
 };
@@ -78,8 +75,20 @@ function CartoonPlane({ className = "" }: { className?: string }) {
   );
 }
 
-export function ScoutPlane({ activeAgent, city, country }: Props) {
-  const p = PROGRESS[activeAgent];
+export function ScoutPlane({
+  scoutPhase,
+  selectedSkills,
+  completedSkills,
+  activeSkill,
+  city,
+  country,
+}: Props) {
+  const p = scoutProgressFraction({
+    scoutPhase,
+    selectedSkills,
+    completedSkills,
+    activeSkill,
+  });
   const leftPct = 6 + p * 88;
 
   return (

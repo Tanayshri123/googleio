@@ -48,7 +48,7 @@ export function AskScoutPanel({ messages, isLoading, onSend }: Props) {
     <div className="flex h-full min-h-[400px] flex-col rounded-xl border border-neutral-200 bg-neutral-50/30">
       <div className="border-b border-neutral-200 px-4 py-3">
         <p className="text-sm font-semibold text-neutral-900">Ask Scout</p>
-        <p className="text-xs text-neutral-500">Follow-up on this Battle Plan</p>
+        <p className="text-xs text-neutral-500">Follow-up on this Scout Report</p>
       </div>
 
       <div className="flex flex-wrap gap-2 border-b border-neutral-200 px-3 py-2">

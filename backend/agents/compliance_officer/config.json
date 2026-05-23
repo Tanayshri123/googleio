@@ -1,0 +1,7 @@
+{
+  "skill_id": "regulatory_hurdles",
+  "thinking_budget": 512,
+  "tools": ["google_search"],
+  "parallel": true,
+  "role": "strategist"
+}

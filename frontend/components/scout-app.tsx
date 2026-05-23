@@ -20,6 +20,7 @@ export function ScoutApp() {
   const [phase, setPhase] = useState<AppPhase>("landing");
   const [city, setCity] = useState("Austin");
   const [country, setCountry] = useState("United States");
+  const [deepScope, setDeepScope] = useState(false);
   const [companyInput, setCompanyInput] = useState<CompanyInputValue>({
     inputType: "website",
     file: null,
@@ -35,23 +36,26 @@ export function ScoutApp() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if (params.get("demo") === "1") {
-      scout.setBattlePlan(loadDemoBattlePlan());
-      setPhase("battle-plan");
+      const plan = loadDemoBattlePlan();
+      scout.setBattlePlan(plan);
+      scout.markComplete();
+      setPhase("scout-report");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- run once on mount
   }, []);
 
   useEffect(() => {
-    if (scout.battlePlan && phase === "scouting") {
-      setPhase("battle-plan");
+    if (scout.isComplete && scout.battlePlan && phase === "scouting") {
+      setPhase("scout-report");
     }
-  }, [scout.battlePlan, phase]);
+  }, [scout.isComplete, scout.battlePlan, phase]);
 
   const buildInput = useCallback((): ScoutInput => {
     const base = {
       input_type: companyInput.inputType,
       city: city.trim(),
       country: country.trim(),
+      deep_scope: deepScope,
     };
     if (companyInput.inputType === "pdf" && companyInput.file) {
       return { ...base, file: companyInput.file };
@@ -63,7 +67,7 @@ export function ScoutApp() {
       return { ...base, website_url: url };
     }
     return { ...base, company_text: companyInput.companyText };
-  }, [companyInput, city, country]);
+  }, [companyInput, city, country, deepScope]);
 
   const handleSubmit = async () => {
     if (!isCompanyInputValid(companyInput) || !city || !country) return;
@@ -76,7 +80,8 @@ export function ScoutApp() {
     scout.reset();
     chat.clear();
     scout.setBattlePlan(loadDemoBattlePlan());
-    setPhase("battle-plan");
+    scout.markComplete();
+    setPhase("scout-report");
   };
 
   const handleNewScout = () => {
@@ -110,22 +115,28 @@ export function ScoutApp() {
               onSubmit={handleSubmit}
               onDemo={handleDemo}
               isLoading={scout.isStarting}
+              deepScope={deepScope}
+              onDeepScopeChange={setDeepScope}
             />
           )}
 
-          {isScouting && !scout.battlePlan && (
+          {isScouting && !scout.isComplete && (
             <ScoutingView
               key="scouting"
-              activeAgent={scout.activeAgent}
               progress={scout.progress}
               city={city}
               country={country}
+              selectedSkills={scout.selectedSkills}
+              completedSkills={scout.completedSkills}
+              failedSkills={scout.failedSkills}
+              activeSkill={scout.activeSkill}
+              scoutPhase={scout.scoutPhase}
             />
           )}
 
-          {phase === "battle-plan" && scout.battlePlan && (
+          {phase === "scout-report" && scout.battlePlan && (
             <BattlePlanDashboard
-              key="battle-plan"
+              key="scout-report"
               plan={scout.battlePlan}
               onNewScout={handleNewScout}
               chatMessages={chat.messages}

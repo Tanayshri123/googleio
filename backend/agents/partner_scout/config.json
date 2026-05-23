@@ -1,0 +1,8 @@
+{
+  "skill_id": "partner_scout",
+  "thinking_budget": 512,
+  "tools": ["google_search"],
+  "parallel": true,
+  "role": "networker",
+  "output_schema": "{\"ideal_partners\":[],\"trending_partner_types\":[],\"connector_archetypes\":[],\"partnership_plays\":[],\"terrain_summary\":\"\"}"
+}

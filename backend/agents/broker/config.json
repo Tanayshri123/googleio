@@ -1,0 +1,7 @@
+{
+  "skill_id": "network_broker",
+  "thinking_budget": 512,
+  "tools": ["google_search"],
+  "parallel": true,
+  "role": "networker"
+}

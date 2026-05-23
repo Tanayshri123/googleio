@@ -15,34 +15,34 @@ export function useScoutChat(
 
   const send = useCallback(
     async (content: string) => {
-      if (!content.trim()) return;
+      if (!content.trim() || !plan) return;
 
       const userMsg: ChatMessage = {
         id: crypto.randomUUID(),
         role: "user",
         content: content.trim(),
       };
+
+      const historyForApi = [...messages, userMsg].map((m) => ({
+        role: m.role,
+        content: m.content,
+      }));
+
       setMessages((prev) => [...prev, userMsg]);
       setIsLoading(true);
       setError(null);
 
       try {
-        let reply: string;
-
-        if (!plan) {
-          const res = await sendChatMessage(sessionId ?? "demo", content);
-          reply = res.reply;
-        } else if (sessionId === "demo" || !sessionId) {
-          await new Promise((r) => setTimeout(r, 350));
-          reply = replyFromPlan(plan, content);
-        } else {
-          try {
-            const res = await sendChatMessage(sessionId, content);
-            reply = res.reply?.trim() || replyFromPlan(plan, content);
-          } catch {
-            reply = replyFromPlan(plan, content);
-          }
-        }
+        const sid = sessionId ?? "demo";
+        const res = await sendChatMessage(
+          sid,
+          content.trim(),
+          historyForApi,
+          plan,
+        );
+        const reply =
+          res.reply?.trim() ||
+          replyFromPlan(plan, content, messages);
 
         setMessages((prev) => [
           ...prev,
@@ -52,30 +52,20 @@ export function useScoutChat(
         const msg =
           e instanceof Error ? e.message : "Could not reach Ask Scout";
         setError(msg);
-        if (plan) {
-          setMessages((prev) => [
-            ...prev,
-            {
-              id: crypto.randomUUID(),
-              role: "assistant",
-              content: replyFromPlan(plan, content),
-            },
-          ]);
-        } else {
-          setMessages((prev) => [
-            ...prev,
-            {
-              id: crypto.randomUUID(),
-              role: "assistant",
-              content: `Ask Scout failed: ${msg}. Check that the backend is running on port 8000.`,
-            },
-          ]);
-        }
+        const fallback = replyFromPlan(plan, content, messages);
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: crypto.randomUUID(),
+            role: "assistant",
+            content: `${fallback}\n\n_(Live Search unavailable: ${msg})_`,
+          },
+        ]);
       } finally {
         setIsLoading(false);
       }
     },
-    [sessionId, plan],
+    [sessionId, plan, messages],
   );
 
   const clear = useCallback(() => {

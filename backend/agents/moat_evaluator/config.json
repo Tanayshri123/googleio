@@ -1,0 +1,8 @@
+{
+  "skill_id": "moat_evaluator",
+  "thinking_budget": 768,
+  "tools": ["google_search"],
+  "parallel": true,
+  "role": "strategist",
+  "output_schema": "{\"moat_factors\":[],\"defensibility_score\":0,\"local_threats\":[],\"moat_recommendations\":[]}"
+}

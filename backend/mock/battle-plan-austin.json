@@ -1,0 +1,116 @@
+{
+  "company_summary": "Workflow automation platform for restaurants — streamlines inventory, scheduling, and vendor management. B2B SaaS targeting mid-size restaurant chains expanding from SF.",
+  "target_city": "Austin",
+  "target_country": "United States",
+  "competitors": [
+    {
+      "name": "Toast POS",
+      "address": "401 Congress Ave, Austin, TX 78701",
+      "lat": 30.2672,
+      "lng": -97.7431,
+      "notes": "Dominant restaurant POS — has workflow features, direct competitor"
+    },
+    {
+      "name": "Restaurant365",
+      "address": "701 Brazos St, Austin, TX 78701",
+      "lat": 30.2676,
+      "lng": -97.7416,
+      "notes": "Restaurant management software with inventory and scheduling"
+    },
+    {
+      "name": "MarginEdge",
+      "address": "800 W 6th St, Austin, TX 78703",
+      "lat": 30.2689,
+      "lng": -97.7482,
+      "notes": "Restaurant invoice and inventory automation"
+    },
+    {
+      "name": "BlueCart",
+      "address": "3600 N Capital of Texas Hwy, Austin, TX 78746",
+      "lat": 30.3087,
+      "lng": -97.8315,
+      "notes": "Order management and vendor platform for hospitality"
+    }
+  ],
+  "complementary_businesses": [
+    {"name": "Sysco Foods", "address": "Austin, TX", "notes": "Major restaurant supplier — potential integration partner"},
+    {"name": "US Foods", "address": "Austin, TX", "notes": "National food distributor with strong Austin presence"},
+    {"name": "Square", "address": "Austin, TX", "notes": "Payment processing — complementary, could partner on POS integration"}
+  ],
+  "neighborhoods": [
+    {"name": "Downtown", "why_relevant": "High density of restaurants and office workers — prime expansion market"},
+    {"name": "South Congress (SoCo)", "why_relevant": "Trendy dining district with independent restaurants — early adopters"},
+    {"name": "East Austin", "why_relevant": "Fast-growing food scene, food trucks, and new restaurant concepts"},
+    {"name": "The Domain", "why_relevant": "Dense corporate and retail area with chain restaurants — volume customers"}
+  ],
+  "networking_orgs": [
+    {"name": "Austin Technology Council", "type": "Tech association", "url": "https://austintechnologycouncil.org", "relevance": "Largest tech networking org in Austin — founders and BD contacts"},
+    {"name": "Austin Chamber of Commerce", "type": "Chamber", "url": "https://austinchamber.com", "relevance": "Local business community and expansion resources"},
+    {"name": "Capital Factory", "type": "Accelerator", "url": "https://capitalfactory.com", "relevance": "Top Austin startup hub with restaurant tech portfolio companies"},
+    {"name": "Austin Food & Wine Alliance", "type": "Industry group", "url": "https://austinfoodwinealliance.org", "relevance": "Direct industry connections in Austin food scene"}
+  ],
+  "events": [
+    {"title": "Austin Food + Wine Festival", "date": "November 2026", "url": "https://austinfoodandwinefestival.com", "relevance": "Premier Austin food event — meet restaurant owners and decision makers"},
+    {"title": "SXSW", "date": "March 2027", "url": "https://sxsw.com", "relevance": "Massive tech/food crossover — restaurant tech track"},
+    {"title": "Texas Restaurant Show", "date": "July 2026", "url": "https://txrestaurant.org", "relevance": "State restaurant industry conference — vendors and operators"}
+  ],
+  "key_contacts": [
+    {"name": "Joshua Baer", "role": "Founder, Capital Factory", "source": "Austin startup ecosystem leader"},
+    {"name": "Leigh Christie", "role": "Director, Austin Technology Council", "source": "Tech networking connector"},
+    {"name": "Stephen Straus", "role": "Managing Director, KEC Ventures (Austin office)", "source": "Restaurant tech investor"}
+  ],
+  "communities": [
+    {"name": "Austin Startups", "platform": "Reddit", "url": "https://reddit.com/r/AustinStartups"},
+    {"name": "Austin Restaurant Group", "platform": "Facebook", "url": "https://facebook.com/groups/austinrestaurants"},
+    {"name": "ATX Foodies", "platform": "Instagram", "url": "https://instagram.com/atxfoodies"}
+  ],
+  "compliance": {
+    "required_permits": [
+      "City of Austin Business License",
+      "Texas Sales and Use Tax Permit",
+      "Texas Comptroller Registration"
+    ],
+    "zoning_notes": "B2B SaaS company — no physical restaurant. General office zoning applies. If operating from co-working space, ensure sub-lease permits.",
+    "licensing_requirements": [
+      "No restaurant-specific licenses needed (SaaS only)",
+      "Standard Texas business registration",
+      "Data privacy compliance (Texas Business & Commerce Code)"
+    ],
+    "regulatory_bodies": [
+      "City of Austin Business Licensing",
+      "Texas Comptroller of Public Accounts",
+      "Texas Secretary of State"
+    ],
+    "compliance_timeline": "Business registration: 1-2 weeks. Sales tax permit: 2-3 weeks. All achievable in <30 days.",
+    "estimated_costs": "Business license: $75-200. Sales tax permit: Free. Standard registration: $300 filing fee."
+  },
+  "strategy_bullets": [
+    "Austin has 3-4 direct competitors — differentiation on workflow automation for mid-size chains is the gap",
+    "Partner with Square and Toast rather than compete — integration-first strategy",
+    "Target East Austin and SoCo independent restaurants as early adopters; they're tech-savvy and growth-oriented",
+    "Leverage Capital Factory network for warm introductions to restaurant tech founders",
+    "Texas Restaurant Show in July 2026 is the best launchpad — get a booth or sponsor"
+  ],
+  "recommended_first_week": [
+    "Register business with Texas Secretary of State and City of Austin",
+    "Apply for Texas Sales and Use Tax Permit",
+    "Join Austin Technology Council and attend next networking event",
+    "Schedule intro meetings with Capital Factory and Austin Chamber of Commerce",
+    "Visit SoCo and East Austin restaurant clusters for in-person market research",
+    "Secure SXSW 2027 early-bird badge for restaurant tech track"
+  ],
+  "deep_analysis": {
+    "risk_assessment": "Medium risk — 3 established competitors (Toast, Restaurant365, MarginEdge) have Austin presence. However, none specifically target mid-size chain workflow automation end-to-end. The gap exists but requires strong differentiation. Austin restaurant market is growing rapidly, creating a rising tide.",
+    "anomalies": [
+      "Toast POS is listed as competitor but could also be a powerful integration partner — consider partnership-first approach",
+      "No restaurant-specific regulation burden (SaaS only) — this is a compliance advantage over physical restaurant businesses",
+      "Capital Factory has restaurant tech portfolio companies that could be both competitors and collaborators"
+    ],
+    "recommendations": [
+      "Launch with a 'Toast integration-first' go-to-market to differentiate from Restaurant365",
+      "Pilot with 3-5 SoCo independent restaurants before targeting chains",
+      "Hire a local Austin BD rep within first 60 days — Austin values local presence",
+      "Use Texas Restaurant Show booth as official market entry announcement"
+    ]
+  }
+}

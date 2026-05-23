@@ -21,7 +21,7 @@ export function DashboardMock() {
             </p>
             {[
               { icon: LayoutDashboard, label: "Dashboard", active: false },
-              { icon: Map, label: "Battle Plan", active: true },
+              { icon: Map, label: "Scout Report", active: true },
               { icon: MessageCircle, label: "Ask Scout", active: false },
             ].map((item) => (
               <div
@@ -43,7 +43,7 @@ export function DashboardMock() {
                 </div>
                 <div>
                   <p className="text-[11px] font-medium text-neutral-800">Your team</p>
-                  <p className="text-[10px] text-neutral-400">Battle Plan live</p>
+                  <p className="text-[10px] text-neutral-400">Scout Report live</p>
                 </div>
               </div>
             </div>
@@ -53,7 +53,7 @@ export function DashboardMock() {
           <div className="flex-1 p-4 sm:p-5">
             <div className="mb-4 flex items-center justify-between">
               <div>
-                <p className="text-[11px] font-medium text-neutral-400">Battle Plan</p>
+                <p className="text-[11px] font-medium text-neutral-400">Scout Report</p>
                 <p className="text-base font-semibold text-neutral-900">
                   Austin, United States
                 </p>

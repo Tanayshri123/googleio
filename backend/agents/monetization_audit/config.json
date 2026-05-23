@@ -1,0 +1,8 @@
+{
+  "skill_id": "monetization_audit",
+  "thinking_budget": 512,
+  "tools": ["google_search"],
+  "parallel": true,
+  "role": "strategist",
+  "output_schema": "{\"pricing_models_observed\":[],\"revenue_streams\":[],\"unit_economics_notes\":\"\",\"pricing_recommendations\":[]}"
+}

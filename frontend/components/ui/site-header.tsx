@@ -1,5 +1,7 @@
 "use client";
 
+import { ScoutLogo } from "@/components/ui/scout-logo";
+
 type Props = {
   onDemo?: () => void;
   showBack?: boolean;
@@ -8,16 +10,12 @@ type Props = {
 
 export function SiteHeader({ onDemo, showBack, onBack }: Props) {
   return (
-    <header className="sticky top-0 z-50 border-b border-neutral-200/80 bg-white/90 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-white/60 bg-white/75 backdrop-blur-xl shadow-[0_1px_0_rgba(66,133,244,0.08)]">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-5 sm:px-6">
-        <div className="flex items-center gap-2.5">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-neutral-900 text-xs font-bold text-white">
-            G
-          </div>
-          <span className="text-[15px] font-semibold tracking-tight text-neutral-900">
-            Google AI Scout
-          </span>
-        </div>
+        <a href="/" className="flex items-center gap-2.5" aria-label="Google AI Scout home">
+          <ScoutLogo variant="full" height={34} className="hidden sm:flex" />
+          <ScoutLogo variant="mark" height={36} className="sm:hidden" />
+        </a>
 
         <nav className="flex items-center gap-2 sm:gap-4">
           {showBack && onBack ? (
@@ -40,7 +38,7 @@ export function SiteHeader({ onDemo, showBack, onBack }: Props) {
                 <button
                   type="button"
                   onClick={onDemo}
-                  className="rounded-full px-4 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-100"
+                  className="rounded-full border border-[#4285F4]/20 bg-white/80 px-4 py-2 text-sm font-medium text-[#1a73e8] shadow-sm hover:bg-[#4285F4]/5"
                 >
                   View demo
                 </button>

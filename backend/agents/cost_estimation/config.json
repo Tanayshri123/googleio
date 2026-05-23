@@ -1,0 +1,8 @@
+{
+  "skill_id": "cost_estimation",
+  "thinking_budget": 512,
+  "tools": ["google_search"],
+  "parallel": true,
+  "role": "strategist",
+  "output_schema": "{\"neighborhood_costs\":[],\"wage_benchmarks\":[],\"compliance_cost_bracket\":\"\",\"launch_overhead_estimate\":\"\",\"cost_risks\":[]}"
+}

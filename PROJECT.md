@@ -107,6 +107,7 @@ Pattern: **Root orchestrator** + **specialist sub-agents** + **compiler** (Googl
 {
   "company_summary": "string",
   "target_city": "string",
+  "target_country": "string",
   "competitors": [
     { "name": "string", "address": "string", "lat": 0, "lng": 0, "notes": "string" }
   ],
@@ -137,7 +138,7 @@ Pattern: **Root orchestrator** + **specialist sub-agents** + **compiler** (Googl
 
 | Layer | Stack | Features |
 |-------|-------|----------|
-| **Frontend** | Next.js or React | File upload (PDF), city input, loading states, map (Google Maps JS API), cards: Competitors, Events, Strategy |
+| **Frontend** | Next.js | Company input: **PDF, website URL, or text**; **city + country**; scout **plane animation** during agents; YC-style UI; map + cards; **Ask Scout** follow-up chat (no auth) |
 | **Backend** | Node.js or Python | Interactions API (beta) / ADK multi-agent workflow, in-memory session (no DB) |
 | **AI** | Gemini 3.5 Flash | Maps + Search grounding, structured outputs |
 
@@ -166,7 +167,8 @@ The **simulation** is not a game engine—it is an **end-to-end scripted demo** 
 | Field | Value |
 |-------|--------|
 | **Demo company** | B2B SaaS (e.g., "workflow automation for restaurants") — use a real 5–10 slide PDF |
-| **Demo city** | **Austin, TX** (rich Maps/Search signal; narrative: "expanding from SF") |
+| **Demo market** | **Austin** + **United States** (rich Maps/Search signal; narrative: "expanding from SF") |
+| **Demo input** | Website URL or PDF or pasted company text |
 | **Fallback city** | Same pipeline; pre-cache JSON if API fails live |
 
 ---
@@ -200,18 +202,20 @@ Execute in this order to de-risk the demo.
 
 ### Phase 3 — Orchestrator (Day 2)
 
-- [ ] PDF upload → extract text (or pass file to Gemini multimodal) → `company_summary`
+- [ ] Company ingest: PDF **or** website fetch **or** raw text → `company_summary`
 - [ ] Orchestrator prompt: decompose into Cartographer + Networker task strings
 - [ ] Wire pipeline: Orchestrator → Cartographer ∥ Networker (parallel if supported) → Strategist
 - [ ] In-memory session: `sessionId → { status, partial, final }`
 
-**Exit criterion:** `POST /api/scout` with PDF + city returns full Battle Plan JSON.
+**Exit criterion:** `POST /api/scout` with company input + city + country returns full Battle Plan JSON.
+
+- [ ] `POST /api/scout/:sessionId/chat` for follow-up Q&A on completed analysis
 
 ### Phase 4 — Frontend integration (Day 2–3)
 
-- [ ] Upload + city form → call backend → SSE or polling for progress ("Cartographer mapping…")
+- [ ] Input tabs (PDF / website / text) + city & country → poll with plane animation + agent stepper
 - [ ] Map: plot `competitors[].lat/lng` (geocode if agent returns addresses only)
-- [ ] Cards: Competitors, Events, Strategy / First week
+- [ ] Cards: Competitors, Events, Strategy / First week; **Ask Scout** chat panel
 - [ ] Error UI: timeout, grounding failure, retry with cached demo JSON
 
 **Exit criterion:** One recording-quality demo path with no terminal.
@@ -231,9 +235,10 @@ Execute in this order to de-risk the demo.
 | Time | Action | Screen |
 |------|--------|--------|
 | 0:00 | "Meet Google AI Scout—we fix terrain blindness." | Title slide |
-| 0:15 | Upload sample pitch deck | Drop zone |
-| 0:20 | Enter `Austin, TX` | City field |
-| 0:22 | Click **Generate Battle Plan** | Loading: Orchestrator → Cartographer → Networker → Strategist |
+| 0:15 | Paste company website or upload PDF / text | Input tabs |
+| 0:20 | Enter `Austin` + `United States` | Location fields |
+| 0:22 | Click **Generate Battle Plan** | Scout plane flies; agents: General → Cartographer → Networker → Strategist |
+| 1:10 | Ask Scout: *"Who should I partner with first?"* | Chat on analysis |
 | 0:45 | Map populates with competitors | Maps view |
 | 0:55 | Scroll Events + Key contacts | Cards |
 | 1:05 | Highlight Strategy bullets | "First week in Austin" |
@@ -247,11 +252,15 @@ Execute in this order to de-risk the demo.
 
 ```
 POST /api/scout
-  Body: multipart { file: PDF, city: string }
+  Body: { input_type: pdf|website|text, file?, website_url?, company_text?, city, country }
   Response: { sessionId }
 
 GET /api/scout/:sessionId
-  Response: { status: "running"|"done"|"error", progress: string, result?: BattlePlan }
+  Response: { status, progress?, active_agent?, result?: BattlePlan, error? }
+
+POST /api/scout/:sessionId/chat
+  Body: { message: string }
+  Response: { reply: string, citations?: string[] }
 
 GET /api/health
 ```

@@ -1,12 +1,22 @@
-import type { ScoutInput, ScoutStatus } from "@/lib/types";
+import type { BattlePlan, ScoutInput, ScoutStatus } from "@/lib/types";
 import { mockChatReply } from "@/lib/mock/chat-replies";
 import {
   mockGetScoutStatus,
   mockStartScout,
 } from "@/lib/mock/simulate-scout";
+import { normalizeScoutStatus } from "@/lib/normalize-scout-status";
 
-const USE_MOCK = process.env.NEXT_PUBLIC_USE_MOCK !== "false";
+const USE_MOCK = process.env.NEXT_PUBLIC_USE_MOCK === "true";
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+
+async function parseError(res: Response): Promise<string> {
+  try {
+    const body = await res.json();
+    return body.detail ?? body.error ?? res.statusText;
+  } catch {
+    return res.statusText || "Request failed";
+  }
+}
 
 export async function startScout(
   input: ScoutInput,
@@ -27,8 +37,13 @@ export async function startScout(
     method: "POST",
     body: form,
   });
-  if (!res.ok) throw new Error("Failed to start scout");
-  return res.json();
+  if (!res.ok) {
+    throw new Error(await parseError(res));
+  }
+  const data = await res.json();
+  const sessionId = data.sessionId ?? data.session_id;
+  if (!sessionId) throw new Error("No session id returned from backend");
+  return { sessionId };
 }
 
 export async function getScoutStatus(sessionId: string): Promise<ScoutStatus> {
@@ -36,16 +51,21 @@ export async function getScoutStatus(sessionId: string): Promise<ScoutStatus> {
     return mockGetScoutStatus(sessionId);
   }
 
-  const res = await fetch(`${API_URL}/api/scout/${sessionId}`);
-  if (!res.ok) throw new Error("Failed to get scout status");
-  return res.json();
+  const res = await fetch(`${API_URL}/api/scout/${sessionId}`, {
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    throw new Error(await parseError(res));
+  }
+  const raw = await res.json();
+  return normalizeScoutStatus(raw);
 }
 
 export async function sendChatMessage(
   sessionId: string,
   message: string,
 ): Promise<{ reply: string }> {
-  if (USE_MOCK) {
+  if (USE_MOCK || sessionId === "demo") {
     await new Promise((r) => setTimeout(r, 600 + Math.random() * 400));
     return { reply: mockChatReply(message) };
   }
@@ -55,6 +75,20 @@ export async function sendChatMessage(
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ message }),
   });
-  if (!res.ok) throw new Error("Chat failed");
+  if (!res.ok) {
+    throw new Error(await parseError(res));
+  }
   return res.json();
 }
+
+export async function checkBackendHealth(): Promise<boolean> {
+  if (USE_MOCK) return true;
+  try {
+    const res = await fetch(`${API_URL}/api/health`, { cache: "no-store" });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
+export { USE_MOCK, API_URL };

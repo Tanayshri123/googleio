@@ -11,6 +11,7 @@ from typing import Iterable
 
 from schemas import BattlePlanPayload
 from backend.skills import SKILL_REGISTRY, SkillInput, SkillResult
+from backend.strategist import synthesize_strategy
 
 # Maps skill.name -> attribute on BattlePlanPayload that should receive its output
 _SKILL_TO_FIELD: dict[str, str] = {
@@ -52,4 +53,5 @@ async def run_battle_plan(
         if field and r.error is None:
             setattr(plan, field, r.output)
 
+    plan = await synthesize_strategy(plan)
     return plan, results

@@ -74,6 +74,25 @@ async def ingest_text(raw_text: str) -> DeckSummary:
     return DeckSummary.model_validate(json.loads(response.text or "{}"))
 
 
+async def ingest_website(url: str) -> DeckSummary:
+    """Use Search grounding to summarize a company website."""
+    from backend.gemini_client import generate_grounded_then_structured
+
+    prompt = (
+        f"Use Google Search grounding to research the company website: {url}\n\n"
+        "Extract what the company does, who their customers are, and their "
+        "core value proposition. Prefer the site's own positioning."
+    )
+    deck, _ = await generate_grounded_then_structured(
+        research_prompt=prompt,
+        structuring_instructions=_STRUCTURING_INSTRUCTIONS,
+        schema=DeckSummary,
+        grounding="search",
+        thinking="medium",
+    )
+    return deck
+
+
 def extract_pdf_text(pdf_bytes: bytes) -> str:
     """Local fallback extraction with pypdf — no API call."""
     from pypdf import PdfReader

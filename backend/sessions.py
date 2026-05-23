@@ -22,6 +22,8 @@ class Session:
     progress: list[str] = field(default_factory=list)
     result: Optional[dict[str, Any]] = None
     error: Optional[str] = None
+    target_country: str = ""
+    chat_history: list[dict[str, str]] = field(default_factory=list)
     created_at: float = field(default_factory=time.time)
 
 
